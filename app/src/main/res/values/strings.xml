@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ArtSpace</string>
+    <string name="Lemon_Tree">Sailing Under the bridge</string>
+    <string name="Lemon">Blue Sky Shining Bright</string>
+    <string name="Glass_Of_Lemonade">Colourful Boats Like cluster of stars</string>
+    <string name="Empty_Glass">Snowy Mountains with glittery effect</string>
+    <string name="Author1">Kat Kuan (2017)</string>
+    <string name="Author2">Xhin Lee (2021) </string>
+    <string name="Author3">Avani Soam (2023)</string>
+    <string name="Author4">Vedant Soam (2024)</string>
 </resources>

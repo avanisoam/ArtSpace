@@ -25,6 +25,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -37,6 +39,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.artspace.ui.theme.ArtSpaceTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +62,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ArtSpaceApp(modifier : Modifier = Modifier) {
+
+    var slide by remember {
+        mutableStateOf(1)
+    }
+
+    val gallery = when (slide) {
+        1 -> R.drawable.lemon_tree
+        2 -> R.drawable.lemon_squeeze
+        3 -> R.drawable.lemon_drink
+        else -> R.drawable.lemon_restart
+    }
+
+    val title = when (slide) {
+        1 -> R.string.Lemon_Tree
+        2 -> R.string.Lemon
+        3 -> R.string.Glass_Of_Lemonade
+        else -> R.string.Empty_Glass
+    }
+
+    val subtitle = when (slide) {
+        1 -> R.string.Author1
+        2 -> R.string.Author2
+        3 -> R.string.Author3
+        else -> R.string.Author4
+    }
+
 Column(modifier = Modifier
     .fillMaxSize()
     .padding(top = 100.dp),
@@ -70,7 +101,7 @@ Column(modifier = Modifier
         modifier = Modifier
             .size(width = 250.dp, height = 350.dp)
     ){
-    val imageResource = painterResource(R.drawable.lemon_tree)
+    val imageResource = painterResource(gallery)
     Image(
         painter = imageResource,
         contentDescription = null,
@@ -92,20 +123,20 @@ Column(modifier = Modifier
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = "Sailing Under the bridge",
+            text = stringResource(title),
             fontSize = 16.sp,
             //fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start,
             modifier = Modifier
                 .padding(
-                    top=8.dp,
-                  start = 20.dp,
+                    top = 8.dp,
+                    start = 20.dp,
                     end = 20.dp
                 )
                 .background(Color(0xFFF6EDFF))
         )
         Text(
-            text = "Kat Kuan (2017)",
+            text = stringResource(subtitle),
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(4.dp)
@@ -116,13 +147,55 @@ Column(modifier = Modifier
 
     Row(modifier= Modifier
         .weight(1f)) {
-        Button(onClick = { /*TODO*/ },modifier = Modifier.height(40.dp).width(150.dp)) {
+        Button(
+            onClick = {
+                if (slide == 1) {
+                    slide = 1
+                }
+                if (slide == 2) {
+                    slide = 1
+                }
+                if (slide == 3) {
+                    slide = 2
+                }
+                if (slide == 4) {
+                    slide = 3
+                }
+            }
+            ,modifier = Modifier
+            .height(40.dp)
+            .width(150.dp)) {
             Text(text = "Previous")
             //modifier = Modifier.weight(1f)
         }
         Spacer(modifier = Modifier.width(34.dp))
 
-        Button(onClick = { /*TODO*/ },modifier = Modifier.height(40.dp).width(150.dp)) {
+        Button(onClick =
+        {
+            if(slide == 1)
+            {
+                slide = 2
+            }
+            else if(slide == 2)
+            {
+                slide = 3
+            }
+           else if(slide == 3)
+            {
+                slide = 4
+            }
+            else if(slide == 4)
+            {
+                slide = 4
+            }
+            else
+            {
+                slide = 1
+            }
+        }
+            ,modifier = Modifier
+            .height(40.dp)
+            .width(150.dp)) {
             Text(text = "  Next  ")
         }
     }
