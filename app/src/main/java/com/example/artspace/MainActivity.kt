@@ -18,6 +18,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -50,7 +52,9 @@ class MainActivity : ComponentActivity() {
             ArtSpaceTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .background(Color.Green)
+                        .fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
                     ArtSpaceApp()
@@ -61,7 +65,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ArtSpaceApp(modifier : Modifier = Modifier) {
+fun ArtSpaceApp() {
 
     var slide by remember {
         mutableStateOf(1)
@@ -88,8 +92,10 @@ fun ArtSpaceApp(modifier : Modifier = Modifier) {
         else -> R.string.Author4
     }
 
-Column(modifier = Modifier
+    Surface(color = Color.LightGray) {
+Column (modifier = Modifier
     .fillMaxSize()
+    .verticalScroll(rememberScrollState())
     .padding(top = 100.dp),
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally) {
@@ -146,6 +152,7 @@ Column(modifier = Modifier
     Spacer(modifier = Modifier.height(24.dp))
 
     Row(modifier= Modifier
+        //.verticalScroll(rememberScrollState())
         .weight(1f)) {
         Button(
             onClick = {
@@ -163,8 +170,8 @@ Column(modifier = Modifier
                 }
             }
             ,modifier = Modifier
-            .height(40.dp)
-            .width(150.dp)) {
+                .height(40.dp)
+                .width(150.dp)) {
             Text(text = "Previous")
             //modifier = Modifier.weight(1f)
         }
@@ -194,14 +201,15 @@ Column(modifier = Modifier
             }
         }
             ,modifier = Modifier
-            .height(40.dp)
-            .width(150.dp)) {
+                .height(40.dp)
+                .width(150.dp)) {
             Text(text = "  Next  ")
         }
     }
-}
-}
 
+}
+}
+}
 @Preview(showBackground = true)
 @Composable
 fun ArtSpaceAppPreview() {
