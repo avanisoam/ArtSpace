@@ -4,8 +4,12 @@
     <string name="Lemon">Blue Sky Shining Bright</string>
     <string name="Glass_Of_Lemonade">Colourful Boats Like cluster of stars</string>
     <string name="Empty_Glass">Snowy Mountains with glittery effect</string>
-    <string name="Author1">Kat Kuan (2017)</string>
-    <string name="Author2">Xhin Lee (2021) </string>
-    <string name="Author3">Avani Soam (2023)</string>
-    <string name="Author4">Vedant Soam (2024)</string>
+    <string name="Author1">Kat Kuan</string>
+    <string name="Author2">Xhin Lee</string>
+    <string name="Author3">Avani Soam</string>
+    <string name="Author4">Vedant Soam</string>
+    <string name="Year1">(2017)</string>
+    <string name="Year2">(2021)</string>
+    <string name="Year3">(2023)</string>
+    <string name="Year4">(2024)</string>
 </resources>

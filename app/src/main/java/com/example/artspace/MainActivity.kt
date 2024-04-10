@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
@@ -43,7 +44,9 @@ import androidx.compose.ui.unit.sp
 import com.example.artspace.ui.theme.ArtSpaceTheme
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,8 +95,16 @@ fun ArtSpaceApp() {
         else -> R.string.Author4
     }
 
-    Surface(color = Color.LightGray) {
+    val year = when (slide) {
+        1 -> R.string.Year1
+        2 -> R.string.Year2
+        3 -> R.string.Year3
+        else -> R.string.Year4
+    }
+
+//Surface(color = Color.LightGray) {
 Column (modifier = Modifier
+    .background(Color.LightGray)
     .fillMaxSize()
     .verticalScroll(rememberScrollState())
     .padding(top = 100.dp),
@@ -104,8 +115,12 @@ Column (modifier = Modifier
         elevation = CardDefaults.cardElevation(
             defaultElevation = 8.dp
         ),
+        shape = RoundedCornerShape(0.dp),    //By default we get rounded corners
         modifier = Modifier
-            .size(width = 250.dp, height = 350.dp)
+            //.padding(20.dp)
+           // .width(250.dp)
+           // .height(350.dp)
+            //.size(width = 250.dp, height = 350.dp)
     ){
     val imageResource = painterResource(gallery)
     Image(
@@ -114,8 +129,8 @@ Column (modifier = Modifier
         modifier = Modifier
             .width(250.dp)
             .height(350.dp)
-            //.padding(5.dp)
-            .border(BorderStroke(20.dp, Color(0xFFF6EDFF)))
+            .padding(20.dp)
+            .border(BorderStroke(2.dp, Color(0xFFF6EDFF)))
             //.padding(bottom =16.dp)
 
     )
@@ -123,36 +138,45 @@ Column (modifier = Modifier
     Spacer(modifier = Modifier.height(24.dp))
 
     Column(modifier = Modifier
-        .background(Color(0xFFF6EDFF))
+        .background(Color(0xFFdbd8ed))
         .padding(bottom = 16.dp),
         //.fillMaxWidth(),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally) {
+        horizontalAlignment = Alignment.Start) {
         Text(
             text = stringResource(title),
             fontSize = 16.sp,
+            fontFamily = FontFamily.Cursive,
+
             //fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Start,
+            //textAlign = TextAlign.Start,  // Need to ask
             modifier = Modifier
                 .padding(
                     top = 8.dp,
-                    start = 20.dp,
+                    start = 8.dp,
                     end = 20.dp
                 )
-                .background(Color(0xFFF6EDFF))
+               // .background(Color(0xFFF6EDFF))
         )
-        Text(
-            text = stringResource(subtitle),
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(4.dp)
+        Row {
+            Text(
+                text = stringResource(subtitle),
+                fontFamily = FontFamily.Default,
+                fontWeight = FontWeight.Bold,
+                //textAlign = TextAlign.Center,
+                modifier = Modifier.padding(start = 8.dp)
             )
+
+            Text(
+                text = stringResource(year)
+            )
+        }
     }
 
     Spacer(modifier = Modifier.height(24.dp))
 
     Row(modifier= Modifier
-        //.verticalScroll(rememberScrollState())
+        .verticalScroll(rememberScrollState())
         .weight(1f)) {
         Button(
             onClick = {
@@ -203,17 +227,17 @@ Column (modifier = Modifier
             ,modifier = Modifier
                 .height(40.dp)
                 .width(150.dp)) {
-            Text(text = "  Next  ")
+            Text(text = "Next")
         }
     }
 
 }
 }
-}
+//}
 @Preview(showBackground = true)
 @Composable
 fun ArtSpaceAppPreview() {
-    ArtSpaceTheme {
+    MaterialTheme {
         ArtSpaceApp()
     }
 }
